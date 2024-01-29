@@ -28,6 +28,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FCharacter OnDeath;
 
+	UPROPERTY(BlueprintReadWrite)
+	int32 TotalCoins;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,7 +53,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category=System)
 	UParticleSystem* ParticleSystem;
 	
-	
 	void Move(const FInputActionValue& Value);
 
 	UFUNCTION()
@@ -58,6 +60,9 @@ protected:
 
 	UFUNCTION()
 	void CallOnDeath();
+
+	UFUNCTION(BlueprintCallable)
+	void AddCoin();
 
 public:	
 	// Called every frame

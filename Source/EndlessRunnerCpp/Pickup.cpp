@@ -29,36 +29,6 @@ void APickup::BeginPlay()
 	
 }
 
-void APickup::OnGet(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	if (ARunCharacter* RunCharacter = Cast<ARunCharacter>(OtherActor))
-	{
-		OnPlayerOverlap();
-	}
-}
-
-void APickup::OnPlayerOverlap()
-{
-	if (IsPickedUp())
-	{
-		OnPickup();
-	}
-	
-}
-
-void APickup::OnPickup()
-{
-	UGameplayStatics::PlaySoundAtLocation(GetWorld(), PickUpSound, GetActorLocation());
-	Destroy();
-}
-
-bool APickup::IsPickedUp()
-{
-	CanBePickUp = true;
-	return CanBePickUp;
-}
-
 // Called every frame
 void APickup::Tick(float DeltaTime)
 {

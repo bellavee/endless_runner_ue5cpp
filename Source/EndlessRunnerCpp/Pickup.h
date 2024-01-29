@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "RunCharacter.h"
 #include "GameFramework/Actor.h"
 #include "Pickup.generated.h"
 
@@ -15,6 +16,8 @@ class ENDLESSRUNNERCPP_API APickup : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APickup();
+
+	UPROPERTY(Blueprintable)
 	bool CanBePickUp;
 
 protected:
@@ -30,17 +33,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	USoundBase* PickUpSound;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintImplementableEvent)
 	void OnGet(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnPlayerOverlap();
-
-	UFUNCTION()
-	void OnPickup();
-
-	UFUNCTION()
-	bool IsPickedUp();
 
 
 public:	

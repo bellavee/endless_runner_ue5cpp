@@ -80,6 +80,11 @@ void ARunCharacter::CallOnDeath()
 	this->OnDeath.Broadcast();
 }
 
+void ARunCharacter::AddCoin()
+{
+	TotalCoins += 1;
+}
+
 // Called every frame
 void ARunCharacter::Tick(float DeltaTime)
 {

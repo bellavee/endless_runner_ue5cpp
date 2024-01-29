@@ -92,10 +92,8 @@ void AFloorTile::SpawnObstacles()
 		if (ObstacleClasses.Num() > 0)
 		{
 			int32 RandomIndex = FMath::RandHelper(ObstacleClasses.Num());
-			GEngine->AddOnScreenDebugMessage(-1, .5f, FColor::Red, RelativeTransform.ToString());
 			
 			AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstacleClasses[RandomIndex].Get(), RelativeTransform, spawnParams);
-
 			Obstacle->AttachToComponent(Scene, FAttachmentTransformRules::KeepRelativeTransform, TEXT("Obstacle"));
 			
 		}
@@ -119,7 +117,6 @@ void AFloorTile::SpawnPickup()
 		if (PickupClasses.Num() > 0)
 		{
 			int32 RandomIndex = FMath::RandHelper(PickupClasses.Num());
-			GEngine->AddOnScreenDebugMessage(-1, .5f, FColor::Red, RelativeTransform.ToString());
 			
 			APickup* Pickup = GetWorld()->SpawnActor<APickup>(PickupClasses[RandomIndex].Get(), RelativeTransform, spawnParams);
 
