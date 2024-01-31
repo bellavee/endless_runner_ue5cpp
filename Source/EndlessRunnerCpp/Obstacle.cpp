@@ -30,7 +30,7 @@ void AObstacle::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPr
 {
 	if (ARunCharacter* RunCharacter = Cast<ARunCharacter>(OtherActor))
 	{
-		RunCharacter->OnDeath.Broadcast();
+		RunCharacter->Die();
 	}
 }
 

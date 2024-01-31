@@ -53,26 +53,28 @@ void ARunCharacter::Move(const FInputActionValue& Value)
 
 void ARunCharacter::Die()
 {
-	FVector Location = GetMesh()->GetComponentLocation();
-	FRotator Rotation = FRotator::ZeroRotator;
-	FVector Scale = FVector(1.0f);
-	
-	if (ParticleSystem)
+	if (!IsDie)
 	{
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ParticleSystem, Location, Rotation, Scale, true, EPSCPoolMethod::None, true);
-	}
-
-	if (ExplosionSound)
-	{
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ExplosionSound, Location);
-	}
-
-	GetMesh()->SetVisibility(false);
-	IsDie = true;
-
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ARunCharacter::CallOnDeath, 3.0f, false);
+		FVector Location = GetMesh()->GetComponentLocation();
+		FRotator Rotation = FRotator::ZeroRotator;
+		FVector Scale = FVector(1.0f);
 	
+		if (ParticleSystem)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ParticleSystem, Location, Rotation, Scale, true, EPSCPoolMethod::None, true);
+		}
+
+		if (ExplosionSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), ExplosionSound, Location);
+		}
+
+		GetMesh()->SetVisibility(false);
+		IsDie = true;
+
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ARunCharacter::CallOnDeath, 3.0f, false);
+	}
 }
 
 void ARunCharacter::CallOnDeath()
@@ -90,7 +92,10 @@ void ARunCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AddMovementInput(GetActorForwardVector(), 1);
+	if (!IsDie)
+	{
+		AddMovementInput(GetActorForwardVector(), 1);
+	}
 }
 
 // Called to bind functionality to input

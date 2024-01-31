@@ -31,6 +31,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	int32 TotalCoins;
 
+	UFUNCTION()
+	void Die();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -54,9 +57,6 @@ protected:
 	UParticleSystem* ParticleSystem;
 	
 	void Move(const FInputActionValue& Value);
-
-	UFUNCTION()
-	void Die();
 
 	UFUNCTION()
 	void CallOnDeath();
